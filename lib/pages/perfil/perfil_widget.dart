@@ -414,8 +414,9 @@ class _PerfilWidgetState extends State<PerfilWidget>
                                                     currentUserUid,
                                                   ),
                                                 );
-                                                await actions
-                                                    .eliminarFotoAnterior(
+                                                _model.resultadoBorrado =
+                                                    await actions
+                                                        .eliminarFotoAnterior(
                                                   perfilProfilesRow?.photoUrl,
                                                 );
                                                 safeSetState(() => _model
@@ -444,6 +445,8 @@ class _PerfilWidgetState extends State<PerfilWidget>
                                                   ),
                                                 );
                                               }
+
+                                              safeSetState(() {});
                                             },
                                             text: 'Cambiar foto',
                                             options: FFButtonOptions(

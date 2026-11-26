@@ -14,6 +14,8 @@ class PerfilModel extends FlutterFlowModel<PerfilWidget> {
       FFUploadedFile(bytes: Uint8List.fromList([]), originalFilename: '');
   String uploadedFileUrl_uploadDataFak = '';
 
+  // Stores action output result for [Custom Action - eliminarFotoAnterior] action in Button widget.
+  String? resultadoBorrado;
   Completer<List<ProfilesRow>>? requestCompleter;
   // State field(s) for NombreUsuario widget.
   FocusNode? nombreUsuarioFocusNode;

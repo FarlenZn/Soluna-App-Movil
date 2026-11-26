@@ -12,19 +12,22 @@ import 'package:flutter/material.dart' hide RepeatMode;
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-Future eliminarFotoAnterior(String? urlAnterior) async {
-  if (urlAnterior == null || urlAnterior.isEmpty) return;
+Future<String> eliminarFotoAnterior(String? urlAnterior) async {
+  if (urlAnterior == null || urlAnterior.isEmpty) return 'sin url anterior';
 
   const marcador = '/storage/v1/object/public/avatars/';
   final indice = urlAnterior.indexOf(marcador);
-
-  if (indice == -1) return;
+  if (indice == -1) return 'url no es del bucket: $urlAnterior';
 
   final ruta = Uri.decodeComponent(
     urlAnterior.substring(indice + marcador.length).split('?').first,
   );
 
   try {
-    await Supabase.instance.client.storage.from('avatars').remove([ruta]);
-  } catch (e) {}
+    final borrados =
+        await Supabase.instance.client.storage.from('avatars').remove([ruta]);
+    return 'ruta: $ruta, borrados: ${borrados.length}';
+  } catch (e) {
+    return 'error: $e';
+  }
 }
